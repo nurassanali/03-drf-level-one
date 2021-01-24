@@ -30,7 +30,7 @@ def article_detail_api_view(request, pk):
                     }}, status=status.HTTP_404_NOT_FOUND)
     
   if request.method == "GET":
-    serializer = ArticleSerializer(article, data=request.data)
+    serializer = ArticleSerializer(article)
     return Response(serializer.data)
 
   elif request.method == "PUT":
@@ -39,7 +39,7 @@ def article_detail_api_view(request, pk):
       serializer.save()
       return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
   elif request.method == "DELETE":
     article.delete()
     return Response(status=status.HTTP_204_NO_CONTENT)
